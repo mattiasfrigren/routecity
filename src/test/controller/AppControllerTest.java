@@ -1,6 +1,7 @@
 package test.controller;
 
 import controller.AppController;
+import model.Node;
 import model.Session;
 import org.junit.jupiter.api.Test;
 
@@ -27,8 +28,22 @@ class AppControllerTest {
 		assertEquals(sizeAtStart + 5, Session.getSession().getLoadedNodes().size(), "Something is wrong in adding new random nodes to session");
     }
 
+    //TODO fix the string[] with streetnames. once test reaches above index 10 it crashes
     @Test
     void createClosedCircuitWithAllNodes() {
+        AppController.getController().addRandomNodesToSession(5);
+        int zeroSizeCheckOnConnectList[] = new int[Session.getSession().getLoadedNodes().size()];
+        int i =0;
+        for (Node node: Session.getSession().getLoadedNodes().keySet()) {
+           zeroSizeCheckOnConnectList[i]= node.getConnectedNodes().size();
+           i++;
+        }
+        AppController.getController().createClosedCircuitWithAllNodes();
+        i =0;
+        for (Node node: Session.getSession().getLoadedNodes().keySet()) {
+            assertFalse(node.getConnectedNodes().size()==zeroSizeCheckOnConnectList[i]);
+            i++;
+        }
     }
 
     @Test

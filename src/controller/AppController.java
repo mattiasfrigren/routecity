@@ -28,8 +28,8 @@ public class AppController {
 
     public void initializeProgram()
     {
-        //addRandomNodesToSession(10);
-        //createClosedCircuitWithAllNodes();
+        addRandomNodesToSession(10);
+        createClosedCircuitWithAllNodes();
        // addRandomExtraConnectionAtRandomNodes(1);
         // TODO Initialize view // Update it.
 
@@ -73,11 +73,33 @@ public class AppController {
     public void createClosedCircuitWithAllNodes()
     {
 
+        Node nodeArr[] = new Node[Session.getSession().getLoadedNodes().size()];
+        int i = 0;
+        for (Node node :Session.getSession().getLoadedNodes().keySet()) {
+            nodeArr[i] = node;
+            i++;
+        }
+        for (int j = 0; j <nodeArr.length ; j++) {
+            if (j==0){
+                connectNode(nodeArr[nodeArr.length-1],nodeArr[j]);
+                connectNode(nodeArr[j+1],nodeArr[j]);
+            }
+            else if (j<nodeArr.length-1 && j!=0){
+            connectNode(nodeArr[j-1],nodeArr[j]);
+            connectNode(nodeArr[j+1],nodeArr[j]);}
+            else {
+                connectNode(nodeArr[nodeArr.length-2],nodeArr[j]);
+                connectNode(nodeArr[0],nodeArr[j]);
+            }
+        }
+
+
     }
 
     private void connectNode(Node nodeToAddAt, Node nodeToConnectTo)
     {
-
+        nodeToConnectTo.addConnectedNode(nodeToAddAt);
+        System.out.println("connected node:" +nodeToAddAt.getStreetName()+ " to node: " + nodeToConnectTo.getStreetName());
     }
 
     public void addRandomExtraConnectionAtRandomNodes(int i) {
