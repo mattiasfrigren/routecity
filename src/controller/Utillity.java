@@ -25,7 +25,7 @@ public class Utillity {
 
 	public static boolean checkIfNodeWithCoordinatesExist(int x, int y)
 	{
-        for (Node node: Session.getSession().getLoadedNodes().keySet())
+        for (Node node: Session.getSession().getLoadedNodes())
         {
             if (node.getCoordinates().getX() == x && node.getCoordinates().getY() == y )
             {
