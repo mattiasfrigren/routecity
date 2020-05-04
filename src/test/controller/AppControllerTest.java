@@ -27,7 +27,7 @@ class AppControllerTest {
 
 		assertEquals(sizeAtStart + 5, Session.getSession().getLoadedNodes().size(), "Something is wrong in adding new random nodes to session");
     }
-    
+
     @Test
     void createClosedCircuitWithAllNodes() {
 
@@ -45,6 +45,16 @@ class AppControllerTest {
 
     @Test
     void addRandomExtraConnectionAtRandomNode() {
+		AppController.getController().addRandomNodesToSession(5);  // adding 5 nodes.
+		AppController.getController().createClosedCircuitWithAllNodes();
+
+		AppController.getController().addRandomExtraConnectionAtRandomNode();
+		int totalExpectedNodeConnections = (Session.getSession().getLoadedNodes().size() * 2) + 2;
+		int totalNodeConnections = 0;
+		for (Node node: Session.getSession().getLoadedNodes()) {
+			totalNodeConnections += node.getConnectedNodes().size();
+		}
+		assertEquals(totalExpectedNodeConnections, totalNodeConnections, "Did not add extra connection");
     }
 
     @Test
