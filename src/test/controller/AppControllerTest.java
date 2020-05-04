@@ -17,8 +17,8 @@ class AppControllerTest {
     }
 
     @Test
-    void addRandomNodesToSession() {
-
+    void addRandomNodesToSession()
+	{
 		AppController.getController(); // Making sure to create the controller.
     	int sizeAtStart = Session.getSession().getLoadedNodes().size();  // Checking if controller added anything to session at start.
 

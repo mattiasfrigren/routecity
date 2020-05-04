@@ -25,8 +25,8 @@ class UtillityTest {
 	{
         Node testNode = new Node(Constants.streetNames[0],15,15);
         Session.getSession().addToLoadedNodes(testNode);
-        Assertions.assertFalse(Utillity.checkIfNodeWithCoordinatesExist(15,15),"Coordinates on Node already exists");
-        Assertions.assertTrue(Utillity.checkIfNodeWithCoordinatesExist(15,25),"Space in Coordinates are free");
+        Assertions.assertTrue(Utillity.checkIfNodeWithCoordinatesExist(15,15),"Coordinates on Node already exists");
+        Assertions.assertFalse(Utillity.checkIfNodeWithCoordinatesExist(15,25),"Space in Coordinates are free");
 
     }
 }

@@ -19,12 +19,14 @@ public class Utillity {
 
 	public static boolean checkIfNodeWithCoordinatesExist(int x, int y)
 	{
-        for (Node node: Session.getSession().getLoadedNodes().keySet()) {
-            if (node.getCoordinates().getX()==x && node.getCoordinates().getY()==y ){
-                return false;
+        for (Node node: Session.getSession().getLoadedNodes().keySet())
+        {
+            if (node.getCoordinates().getX() == x && node.getCoordinates().getY() == y )
+            {
+                return true;
             }
         }
-	    return true;
+	    return false;
 	}
 
     /* TEST */
