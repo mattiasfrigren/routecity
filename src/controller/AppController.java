@@ -80,9 +80,24 @@ public class AppController {
 			{
 				connectTo = 0;
 			}
-			connectNode(Session.getSession().getLoadedNodes().get(i), Session.getSession().getLoadedNodes().get(connectTo));
+			connectNode(i, connectTo);
 		}
     }
+
+	private boolean isConnected(int index1, int index2)
+	{
+		return isConnected(Session.getSession().getLoadedNodes().get(index1), Session.getSession().getLoadedNodes().get(index2));
+	}
+
+    private boolean isConnected(Node node1, Node node2)
+	{
+		return node1.getConnectedNodes().contains(node2);
+	}
+
+	private void connectNode(int index1, int index2)
+	{
+		connectNode(Session.getSession().getLoadedNodes().get(index1), Session.getSession().getLoadedNodes().get(index2));
+	}
 
     private void connectNode(Node nodeToAddAt, Node nodeToConnectTo)
     {
@@ -93,13 +108,45 @@ public class AppController {
     }
 
     public void addRandomExtraConnectionAtRandomNodes(int i) {
-
+		for (int j = 0; j < i; j++)
+		{
+			addRandomExtraConnectionAtRandomNode();
+		}
     }
 
     public void addRandomExtraConnectionAtRandomNode() {
-        int firstRandomNode = new Random().nextInt(Session.getSession().getLoadedNodes().size());
-        int SecoundRandomNode = new Random().nextInt(Session.getSession().getLoadedNodes().size());
-        
+
+    	if (Session.getSession().getLoadedNodes().size() < 2)
+		{
+			return;
+		}
+
+    	int maxNodes = Session.getSession().getLoadedNodes().size();
+
+		int randomNode = new Random().nextInt(maxNodes);
+		int randomNode2 = new Random().nextInt(maxNodes);
+
+		for (int i = 0; i < 50; i++)
+		{
+			if (randomNode2 == randomNode || isConnected(randomNode, randomNode2))
+			{
+				randomNode = new Random().nextInt(maxNodes);
+				randomNode2 = new Random().nextInt(maxNodes);
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		if (randomNode2 != randomNode || !isConnected(randomNode, randomNode2))
+		{
+			connectNode(randomNode, randomNode2);
+		}
+		else
+		{
+			System.out.println("Was not able to add random connection to node");
+		}
     }
 
     public void resetAllNodes()
