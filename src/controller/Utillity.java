@@ -9,10 +9,7 @@ public class Utillity {
 
     private static float getFlightPathDistance(Node startNode, Node endNode)
     {
-        Coordinates start = startNode.getCoordinates();
-        Coordinates end = endNode.getCoordinates();
-
-    	return getFlightPathDistance(start, end);
+    	return getFlightPathDistance(startNode.getCoordinates(), endNode.getCoordinates());
     }
 
 	private static float getFlightPathDistance(Coordinates start, Coordinates end)
