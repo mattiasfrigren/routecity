@@ -54,11 +54,6 @@ public class AppController {
 
     }
 
-    private boolean checkIfNodeWithCoordinatesExist(int x, int y)
-    {
-        return false;
-    }
-
     public void resetAllNodes()
     {
         Session.getSession().resetSession();
@@ -78,8 +73,4 @@ public class AppController {
         connectNode(nodeToAddAt, nodeToConnectTo);
     }
 
-    private boolean checkIfNodeWithCoordinatesExistTest(int x, int y)
-    {
-        return checkIfNodeWithCoordinatesExist(x, y);
-    }
 }

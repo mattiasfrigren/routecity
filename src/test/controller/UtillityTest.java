@@ -1,8 +1,8 @@
 package test.controller;
 
-import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class UtillityTest {
 
@@ -13,4 +13,10 @@ class UtillityTest {
     @Test
     void getFlightPathDistanceTest() {
     }
+
+    @Test
+	void checkIfNodeWithCoordinatesExist()
+	{
+
+	}
 }

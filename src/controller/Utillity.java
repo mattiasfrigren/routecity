@@ -16,6 +16,11 @@ public class Utillity {
         return null;
     }
 
+	public static boolean checkIfNodeWithCoordinatesExist(int x, int y)
+	{
+		return false;
+	}
+
     /* TEST */
     public static float getFlightPathDistanceTest(Node startNode, Node endNode)
     {
