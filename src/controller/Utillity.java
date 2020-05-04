@@ -1,7 +1,7 @@
 package controller;
 
 import model.Node;
-import model.PathValue;
+import model.Path;
 
 public class Utillity {
 
@@ -10,7 +10,7 @@ public class Utillity {
         return 0;
     }
 
-    public static PathValue djikstrasGetShortestPath(Node startNode, Node endNode)
+    public static Path djikstrasGetShortestPath(Node startNode, Node endNode)
     {
         //new PathValue(null, 25);
         return null;

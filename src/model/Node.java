@@ -4,29 +4,19 @@ import java.util.ArrayList;
 
 public class Node {
     private String streetName;
-    private int coordinateX;
-    private int coordinateY;
+	private Coordinates coordinates;
 
     private ArrayList<Node> connectedNodes;
 
     public Node(String streetName, int coordinateX, int coordinateY)
     {
         this.streetName = streetName;
-        this.coordinateX = coordinateX;
-        this.coordinateY = coordinateY;
+        coordinates = new Coordinates(coordinateX, coordinateY);
         connectedNodes = new ArrayList<>();
     }
 
     public String getStreetName() {
         return streetName;
-    }
-
-    public int getCoordinateX() {
-        return coordinateX;
-    }
-
-    public int getCoordinateY() {
-        return coordinateY;
     }
 
     public ArrayList<Node> getConnectedNodes() {

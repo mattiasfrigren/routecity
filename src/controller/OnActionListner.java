@@ -1,12 +1,11 @@
 package controller;
 
-import model.Node;
-import model.PathValue;
+import model.Path;
 import model.Session;
 
 public class OnActionListner {
 
-    public static PathValue CalculateShortestPath()
+    public static Path CalculateShortestPath()
     {
         return Utillity.djikstrasGetShortestPath(Session.getSession().getSelectedStartNode(), Session.getSession().getSelectedEndNode());
     }
