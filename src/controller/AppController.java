@@ -107,7 +107,9 @@ public class AppController {
     }
 
     public void addRandomExtraConnectionAtRandomNode() {
-
+        int firstRandomNode = new Random().nextInt(Session.getSession().getLoadedNodes().size());
+        int SecoundRandomNode = new Random().nextInt(Session.getSession().getLoadedNodes().size());
+        
     }
 
     public void resetAllNodes()
