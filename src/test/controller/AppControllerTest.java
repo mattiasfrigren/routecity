@@ -27,23 +27,16 @@ class AppControllerTest {
 
 		assertEquals(sizeAtStart + 5, Session.getSession().getLoadedNodes().size(), "Something is wrong in adding new random nodes to session");
     }
-
-    //TODO fix the string[] with streetnames. once test reaches above index 10 it crashes
+    
     @Test
     void createClosedCircuitWithAllNodes() {
-        AppController.getController().addRandomNodesToSession(5);
-        int zeroSizeCheckOnConnectList[] = new int[Session.getSession().getLoadedNodes().size()];
-        int i =0;
-        for (Node node: Session.getSession().getLoadedNodes().keySet()) {
-           zeroSizeCheckOnConnectList[i]= node.getConnectedNodes().size();
-           i++;
-        }
-        AppController.getController().createClosedCircuitWithAllNodes();
-        i =0;
-        for (Node node: Session.getSession().getLoadedNodes().keySet()) {
-            assertFalse(node.getConnectedNodes().size()==zeroSizeCheckOnConnectList[i]);
-            i++;
-        }
+
+		AppController.getController().addRandomNodesToSession(5);  // adding 5 nodes.
+
+		AppController.getController().createClosedCircuitWithAllNodes();
+		for (Node node: Session.getSession().getLoadedNodes()) {
+			assertEquals(2, node.getConnectedNodes().size(), "Node: " + node.getStreetName() + " Do not have two connections.");
+		}
     }
 
     @Test

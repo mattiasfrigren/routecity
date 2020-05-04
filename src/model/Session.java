@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Session {
@@ -8,11 +9,11 @@ public class Session {
     private Node selectedStartNode;
     private Node selectedEndNode;
 
-    private HashMap<Node, Image> loadedNodes;
+    private ArrayList<Node> loadedNodes;
 
     private Session()
     {
-        loadedNodes = new HashMap<>();
+        loadedNodes = new ArrayList<>();
     }
 
     public static Session getSession()
@@ -46,17 +47,12 @@ public class Session {
         this.selectedEndNode = selectedEndNode;
     }
 
-    public HashMap<Node, Image> getLoadedNodes() {
+    public ArrayList<Node> getLoadedNodes() {
         return loadedNodes;
     }
 
-    public void setLoadedNodes(HashMap<Node, Image> loadedNodes) {
-        this.loadedNodes = loadedNodes;
-    }
-
     public void addToLoadedNodes(Node node) {
-        Image image = null;
-        loadedNodes.put(node, image);
+    	this.loadedNodes.add(node);
     }
 
     public void removeFromLoadedNodes(Node node) {
