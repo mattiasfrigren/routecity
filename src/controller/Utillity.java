@@ -2,6 +2,7 @@ package controller;
 
 import model.Node;
 import model.Path;
+import model.Session;
 
 public class Utillity {
 
@@ -18,7 +19,12 @@ public class Utillity {
 
 	public static boolean checkIfNodeWithCoordinatesExist(int x, int y)
 	{
-		return false;
+        for (Node node: Session.getSession().getLoadedNodes().keySet()) {
+            if (node.getCoordinates().getX()==x && node.getCoordinates().getY()==y ){
+                return false;
+            }
+        }
+	    return true;
 	}
 
     /* TEST */
