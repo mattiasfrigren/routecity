@@ -26,4 +26,9 @@ public class Node {
     public void addConnectedNode(Node node) {
         connectedNodes.add(node);
     }
+
+	public Coordinates getCoordinates()
+	{
+		return coordinates;
+	}
 }
