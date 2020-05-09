@@ -1,21 +1,31 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Path
 {
-    private Node[] nodePath;
-    private float totalDistance;
+    private ArrayList<Node> nodePath = new ArrayList<>();
+    private float totalDistance = 0;
 
-    public Path(Node[] nodePath, float totalDistance)
+    public Path(Node startNode, Node nextNode, float distanceBetween)
     {
-        this.nodePath = nodePath;
-        this.totalDistance = totalDistance;
+        nodePath.add(startNode);
+        nodePath.add(nextNode);
+        totalDistance = distanceBetween;
     }
 
-    public Node[] getNodePath() {
-        return nodePath;
-    }
+	public ArrayList<Node> getNodePath()
+	{
+		return nodePath;
+	}
 
-    public float getTotalDistance() {
+	public float getTotalDistance() {
         return totalDistance;
     }
+
+    public void addNextNodeToPath(Node node, float distanceBetween)
+	{
+		nodePath.add(node);
+		totalDistance += distanceBetween;
+	}
 }
