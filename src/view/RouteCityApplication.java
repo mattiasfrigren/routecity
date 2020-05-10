@@ -87,7 +87,7 @@ public class RouteCityApplication extends JFrame{
 						greenLinesBetweenNodes.clear();
 						for (int i = 0; i < fastestPath.size() - 1; i++)
 						{
-							greenLinesBetweenNodes.add(new Line2D.Float((fastestPath.get(i).getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize + 15, (fastestPath.get(i).getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize + 30, (fastestPath.get(i +1).getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize + 15, (fastestPath.get(i +1).getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize + 30));
+							greenLinesBetweenNodes.add(new Line2D.Double((fastestPath.get(i).getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (fastestPath.get(i).getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.29, (fastestPath.get(i +1).getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (fastestPath.get(i +1).getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.29));
 						}
 
 						repaint();
