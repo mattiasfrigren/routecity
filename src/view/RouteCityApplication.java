@@ -1,5 +1,6 @@
 package view;
 
+import controller.Utillity;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Line2D;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import model.Constants;
 import model.Node;
@@ -18,6 +20,7 @@ public class RouteCityApplication extends JFrame{
 
 	private ArrayList<ViewNode> viewNodes = new ArrayList<>();
 	private ArrayList<Line2D> linesBetweenNodes = new ArrayList<>();
+	private ArrayList<Line2D> greenLinesBetweenNodes = new ArrayList<>();
 
 	public RouteCityApplication() throws IOException
 	{
@@ -34,8 +37,13 @@ public class RouteCityApplication extends JFrame{
 
 		setLocationRelativeTo(null);
 		initializeAllNodes();
+		initializeButtons();
 
 		setVisible(true);
+	}
+
+	private void initializeButtons()
+	{
 	}
 
 	private void initializeAllNodes() throws IOException
@@ -73,7 +81,18 @@ public class RouteCityApplication extends JFrame{
 							}
 						}
 					}
-					repaint();
+					if (Session.getSession().getSelectedStartNode() != null && Session.getSession().getSelectedEndNode() != null)
+					{
+						ArrayList<Node> fastestPath = Utillity.djikstrasGetShortestPath(Session.getSession().getSelectedStartNode(), Session.getSession().getSelectedEndNode());
+						greenLinesBetweenNodes.clear();
+						for (int i = 0; i < fastestPath.size() - 1; i++)
+						{
+							greenLinesBetweenNodes.add(new Line2D.Float((fastestPath.get(i).getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize + 15, (fastestPath.get(i).getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize + 30, (fastestPath.get(i +1).getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize + 15, (fastestPath.get(i +1).getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize + 30));
+						}
+
+						repaint();
+					}
+
 				}
 			});
 
@@ -90,7 +109,6 @@ public class RouteCityApplication extends JFrame{
 
 		paintLinesBetweenNodes(g2);
 
-
 	}
 
 	public void paintLinesBetweenNodes(Graphics2D g2) {
@@ -99,6 +117,11 @@ public class RouteCityApplication extends JFrame{
 			g2.draw(line);
 		}
 
+		for (Line2D line : greenLinesBetweenNodes)
+		{
+			g2.setColor(Color.green);
+			g2.draw(line);
+		}
 	}
 
 
