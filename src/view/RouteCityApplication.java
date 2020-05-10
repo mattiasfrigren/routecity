@@ -54,7 +54,7 @@ public class RouteCityApplication extends JFrame{
 
 			for (Node nod: node.getConnectedNodes())
 			{
-				linesBetweenNodes.add(new Line2D.Float((node.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize + 15, (node.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize + 30, (nod.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize + 15, (nod.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize + 30));
+				linesBetweenNodes.add(new Line2D.Double((node.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (node.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65, (nod.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (nod.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65));
 			}
 
 
@@ -87,7 +87,7 @@ public class RouteCityApplication extends JFrame{
 						greenLinesBetweenNodes.clear();
 						for (int i = 0; i < fastestPath.size() - 1; i++)
 						{
-							greenLinesBetweenNodes.add(new Line2D.Double((fastestPath.get(i).getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (fastestPath.get(i).getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.29, (fastestPath.get(i +1).getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (fastestPath.get(i +1).getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.29));
+							greenLinesBetweenNodes.add(new Line2D.Double((fastestPath.get(i).getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (fastestPath.get(i).getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65, (fastestPath.get(i +1).getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (fastestPath.get(i +1).getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65));
 						}
 
 						repaint();
