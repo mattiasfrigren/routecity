@@ -9,6 +9,8 @@ public class Session {
     private Node selectedStartNode;
     private Node selectedEndNode;
 
+    private boolean selectStartNode = false;
+
     private ArrayList<Node> loadedNodes;
 
     private Session()
@@ -35,16 +37,8 @@ public class Session {
         return selectedStartNode;
     }
 
-    public void setSelectedStartNode(Node selectedStartNode) {
-        this.selectedStartNode = selectedStartNode;
-    }
-
     public Node getSelectedEndNode() {
         return selectedEndNode;
-    }
-
-    public void setSelectedEndNode(Node selectedEndNode) {
-        this.selectedEndNode = selectedEndNode;
     }
 
     public ArrayList<Node> getLoadedNodes() {
@@ -58,4 +52,20 @@ public class Session {
     public void removeFromLoadedNodes(Node node) {
         loadedNodes.remove(node);
     }
+
+    public void setSelectedNode(Node node) {
+		selectStartNode = !selectStartNode;
+
+		if (selectStartNode) {
+    		selectedStartNode = node;
+		}
+		else {
+			selectedEndNode = node;
+		}
+	}
+
+	public void resetSelectedNodes() {
+		selectedStartNode = null;
+		selectedEndNode = null;
+	}
 }
