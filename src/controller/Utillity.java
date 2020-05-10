@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import model.Coordinates;
 import model.Node;
-import model.Path;
 import model.Session;
 
 public class Utillity {
@@ -114,6 +113,33 @@ public class Utillity {
             }
         }
 	    return false;
+	}
+
+	public static void createClosedCircuitWithAllNodes()
+	{
+		int connectTo = 0;
+		for (int i = 0; i < Session.getSession().getLoadedNodes().size(); i++)
+		{
+			connectTo = i + 1;
+			if (i == Session.getSession().getLoadedNodes().size() - 1)
+			{
+				connectTo = 0;
+			}
+			connectNode(i, connectTo);
+		}
+	}
+
+	public static void connectNode(int index1, int index2)
+	{
+		connectNode(Session.getSession().getLoadedNodes().get(index1), Session.getSession().getLoadedNodes().get(index2));
+	}
+
+	public static void connectNode(Node nodeToAddAt, Node nodeToConnectTo)
+	{
+		nodeToAddAt.addConnectedNode(nodeToConnectTo);
+		nodeToConnectTo.addConnectedNode(nodeToAddAt);
+		System.out.println("connected node:" +nodeToAddAt.getStreetName()+ " to node: " + nodeToConnectTo.getStreetName());
+		System.out.println("connected node:" +nodeToConnectTo.getStreetName()+ " to node: " + nodeToAddAt.getStreetName());
 	}
 
     /* TEST */

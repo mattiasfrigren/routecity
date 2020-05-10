@@ -1,6 +1,8 @@
 package test.controller;
 
 import controller.AppController;
+import controller.Utillity;
+import java.io.IOException;
 import model.Node;
 import model.Session;
 import org.junit.jupiter.api.Test;
@@ -18,7 +20,7 @@ class AppControllerTest {
     }
 
     @Test
-    void addRandomNodesToSession()
+    void addRandomNodesToSession() throws IOException
 	{
 		AppController.getController(); // Making sure to create the controller.
     	int sizeAtStart = Session.getSession().getLoadedNodes().size();  // Checking if controller added anything to session at start.
@@ -29,11 +31,12 @@ class AppControllerTest {
     }
 
     @Test
-    void createClosedCircuitWithAllNodes() {
+    void createClosedCircuitWithAllNodes() throws IOException
+	{
 
 		AppController.getController().addRandomNodesToSession(5);  // adding 5 nodes.
 
-		AppController.getController().createClosedCircuitWithAllNodes();
+		Utillity.createClosedCircuitWithAllNodes();
 		for (Node node: Session.getSession().getLoadedNodes()) {
 			assertEquals(2, node.getConnectedNodes().size(), "Node: " + node.getStreetName() + " Do not have two connections.");
 		}
@@ -44,9 +47,10 @@ class AppControllerTest {
     }
 
     @Test
-    void addRandomExtraConnectionAtRandomNode() {
+    void addRandomExtraConnectionAtRandomNode() throws IOException
+	{
 		AppController.getController().addRandomNodesToSession(5);  // adding 5 nodes.
-		AppController.getController().createClosedCircuitWithAllNodes();
+		Utillity.createClosedCircuitWithAllNodes();
 
 		AppController.getController().addRandomExtraConnectionAtRandomNode();
 		int totalExpectedNodeConnections = (Session.getSession().getLoadedNodes().size() * 2) + 2;
