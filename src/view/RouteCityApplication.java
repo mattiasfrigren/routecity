@@ -1,7 +1,11 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Line2D;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -13,7 +17,7 @@ import model.viewModel.ViewNode;
 public class RouteCityApplication extends JFrame{
 
 	private ArrayList<ViewNode> viewNodes = new ArrayList<>();
-
+	private ArrayList<Line2D> linesBetweenNodes = new ArrayList<>();
 
 	public RouteCityApplication() throws IOException
 	{
@@ -30,6 +34,7 @@ public class RouteCityApplication extends JFrame{
 
 		setLocationRelativeTo(null);
 		initializeAllNodes();
+
 		setVisible(true);
 	}
 
@@ -38,6 +43,12 @@ public class RouteCityApplication extends JFrame{
 		for (Node node : Session.getSession().getLoadedNodes())
 		{
 			ViewNode viewNode = new ViewNode(node.getStreetName(), node.getCoordinates(), node);
+
+			for (Node nod: node.getConnectedNodes())
+			{
+				linesBetweenNodes.add(new Line2D.Float((node.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize + 15, (node.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize + 30, (nod.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize + 15, (nod.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize + 30));
+			}
+
 
 			viewNode.addMouseListener(new MouseAdapter()
 			{
@@ -62,6 +73,7 @@ public class RouteCityApplication extends JFrame{
 							}
 						}
 					}
+					repaint();
 				}
 			});
 
@@ -69,5 +81,26 @@ public class RouteCityApplication extends JFrame{
 			add(viewNode);
 		}
 	}
+
+
+
+	public void paint(Graphics g) {
+		super.paint(g);
+		Graphics2D g2 = (Graphics2D) g;
+
+		paintLinesBetweenNodes(g2);
+
+
+	}
+
+	public void paintLinesBetweenNodes(Graphics2D g2) {
+		for (Line2D line : linesBetweenNodes)
+		{
+			g2.draw(line);
+		}
+
+	}
+
+
 
 }
