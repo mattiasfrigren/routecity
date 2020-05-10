@@ -2,8 +2,8 @@ package model;
 
 public class Constants {
 
-	public static final int mainFrameMaxX = 1035;
-	public static final  int mainFrameMaxY = 1000;
+	public static final int mainFrameMaxX = 1035 /2;
+	public static final  int mainFrameMaxY = 1000 /2;
 
     public static final String[] streetNames = {"Olskroken", "Centralen", "Brunnsparken", "Hissingen", "Korsvägen", "Frölunda", "Liseberg", "Liné", "Feskekörka", "Lejonklippan"};
 

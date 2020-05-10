@@ -35,7 +35,13 @@ public class ViewNode extends JPanel
 		this.streetName.setBounds(0, 0, Constants.nodeViewSize, (int) (Constants.nodeViewSize * 0.4));
 		nodeImage.setBounds(0, (int) (Constants.nodeViewSize * 0.4), Constants.nodeViewSize , (int) (Constants.nodeViewSize * 0.6));
 
-		this.streetName.setFont(new Font(streetName, Font.PLAIN, (int) (Constants.mainFrameMaxX * 0.0087)));
+		int textSize = 9;
+		if (Constants.mainFrameMaxX < 600)
+		{
+			textSize = 6;
+		}
+
+		this.streetName.setFont(new Font(streetName, Font.PLAIN, textSize));
 
 		setBounds((coordinates.getX() * Constants.nodeViewSize) + Constants.nodeViewSize/2, (coordinates.getY() * Constants.nodeViewSize) + Constants.nodeViewSize/2, Constants.nodeViewSize, Constants.nodeViewSize);
 		add(this.streetName);
