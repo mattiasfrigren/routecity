@@ -10,9 +10,8 @@ import model.Node;
 import model.Session;
 import model.viewModel.ViewNode;
 
-public class RouteCityApplication {
+public class RouteCityApplication extends JFrame{
 
-	private JFrame mainFrame = new JFrame();
 	private ArrayList<ViewNode> viewNodes = new ArrayList<>();
 
 
@@ -23,15 +22,15 @@ public class RouteCityApplication {
 
 	private void initializeMainFrame() throws IOException
 	{
-		mainFrame.setTitle("Route City");
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setSize(Constants.mainFrameMaxX, Constants.mainFrameMaxY);
-		mainFrame.setLayout(null);
-		mainFrame.setResizable(false);
+		setTitle("Route City");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(Constants.mainFrameMaxX, Constants.mainFrameMaxY);
+		setLayout(null);
+		setResizable(false);
 
-		mainFrame.setLocationRelativeTo(null);
+		setLocationRelativeTo(null);
 		initializeAllNodes();
-		mainFrame.setVisible(true);
+		setVisible(true);
 	}
 
 	private void initializeAllNodes() throws IOException
@@ -67,7 +66,7 @@ public class RouteCityApplication {
 			});
 
 			viewNodes.add(viewNode);
-			mainFrame.add(viewNode);
+			add(viewNode);
 		}
 	}
 
