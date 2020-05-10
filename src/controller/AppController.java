@@ -32,7 +32,7 @@ public class AppController {
 	{
      	addRandomNodesToSession(10);
         Utillity.createClosedCircuitWithAllNodes();
-       	addRandomExtraConnectionAtRandomNodes(1);
+       	addRandomExtraConnectionAtRandomNodes(4);
         // TODO Initialize view // Update it.
 
      	view = new RouteCityApplication();
@@ -64,7 +64,14 @@ public class AppController {
 
 		if (!Utillity.checkIfNodeWithCoordinatesExist(x, y))
 		{
-			Session.getSession().addToLoadedNodes(new Node(Constants.streetNames[currentNameIndex], x, y));
+			if (currentNameIndex < Constants.streetNames.length)
+			{
+				Session.getSession().addToLoadedNodes(new Node(Constants.streetNames[currentNameIndex], x, y));
+			}
+			else
+				{
+					Session.getSession().addToLoadedNodes(new Node("Lasse " + currentNameIndex, x, y));
+			}
 			currentNameIndex++;
 		}
 		else
