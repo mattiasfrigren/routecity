@@ -7,7 +7,7 @@ public class OnActionListner {
 
     public static Path CalculateShortestPath()
     {
-        return Utillity.djikstrasGetShortestPath(Session.getSession().getSelectedStartNode(), Session.getSession().getSelectedEndNode());
+        return null; //Utillity.djikstrasGetShortestPath(Session.getSession().getSelectedStartNode(), Session.getSession().getSelectedEndNode());
     }
 
     public static void resetSelectedNodes()

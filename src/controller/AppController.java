@@ -28,11 +28,18 @@ public class AppController {
 
     public void initializeProgram()
     {
-        //addRandomNodesToSession(10);
-        //createClosedCircuitWithAllNodes();
-       // addRandomExtraConnectionAtRandomNodes(1);
+        addRandomNodesToSession(10);
+        createClosedCircuitWithAllNodes();
+       addRandomExtraConnectionAtRandomNodes(1);
         // TODO Initialize view // Update it.
 
+		String pathNodes = "";
+		for (Node node: Utillity.djikstrasGetShortestPath(Session.getSession().getLoadedNodes().get(0), Session.getSession().getLoadedNodes().get(5)))
+		{
+			pathNodes += node.getStreetName() + " -> ";
+		}
+
+		System.out.println(pathNodes + " X");
     }
 
     public void addRandomNodesToSession(int amount)
