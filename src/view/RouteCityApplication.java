@@ -123,6 +123,8 @@ public class RouteCityApplication extends JFrame{
 		{
 			g2.draw(line);
 		}*/
+		Font font = new Font(Font.MONOSPACED, Font.BOLD, 12);
+		g2.setFont(font);
 
 			linesBetweenNodesAndValue.forEach((k,v)-> {
 				g2.draw(k);
@@ -132,8 +134,7 @@ public class RouteCityApplication extends JFrame{
 				float y = (float) ((k.getY1() +  k.getY2()) / 2) ;
 
 				String vWithTwoDecimals = String.format("%.02f", v);
-				Font font = new Font(Font.MONOSPACED, Font.BOLD, 12);
-				g2.setFont(font);
+
 				g2.drawString(vWithTwoDecimals, x, y);
 		});
 
@@ -147,8 +148,7 @@ public class RouteCityApplication extends JFrame{
 			float y = (float) ((k.getY1() +  k.getY2()) / 2) ;
 
 			String vWithTwoDecimals = String.format("%.02f", v);
-			Font font = new Font(Font.MONOSPACED, Font.BOLD, 12);
-			g2.setFont(font);
+			
 			g2.drawString(vWithTwoDecimals, x, y);
 		});
 
