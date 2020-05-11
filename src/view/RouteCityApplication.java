@@ -2,6 +2,7 @@ package view;
 
 import controller.Utillity;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
@@ -9,7 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Line2D;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.swing.JButton;
+import java.util.HashMap;
 import javax.swing.JFrame;
 import model.Constants;
 import model.Node;
@@ -21,6 +22,9 @@ public class RouteCityApplication extends JFrame{
 	private ArrayList<ViewNode> viewNodes = new ArrayList<>();
 	private ArrayList<Line2D> linesBetweenNodes = new ArrayList<>();
 	private ArrayList<Line2D> greenLinesBetweenNodes = new ArrayList<>();
+
+	private HashMap<Line2D, Float> linesBetweenNodesAndValue = new HashMap<>();
+	private HashMap<Line2D, Float> greenLinesBetweenNodesAndValue = new HashMap<>();
 
 	public RouteCityApplication() throws IOException
 	{
@@ -54,7 +58,8 @@ public class RouteCityApplication extends JFrame{
 
 			for (Node nod: node.getConnectedNodes())
 			{
-				linesBetweenNodes.add(new Line2D.Double((node.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (node.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65, (nod.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (nod.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65));
+				linesBetweenNodesAndValue.put(new Line2D.Double((node.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (node.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65, (nod.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (nod.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65), Utillity.getFlightPathDistanceTest(node.getCoordinates(), nod.getCoordinates()));
+				//linesBetweenNodes.add(new Line2D.Double((node.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (node.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65, (nod.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (nod.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65));
 			}
 
 
@@ -84,10 +89,10 @@ public class RouteCityApplication extends JFrame{
 					if (Session.getSession().getSelectedStartNode() != null && Session.getSession().getSelectedEndNode() != null)
 					{
 						ArrayList<Node> fastestPath = Utillity.djikstrasGetShortestPath(Session.getSession().getSelectedStartNode(), Session.getSession().getSelectedEndNode());
-						greenLinesBetweenNodes.clear();
+						greenLinesBetweenNodesAndValue.clear();
 						for (int i = 0; i < fastestPath.size() - 1; i++)
 						{
-							greenLinesBetweenNodes.add(new Line2D.Double((fastestPath.get(i).getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (fastestPath.get(i).getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65, (fastestPath.get(i +1).getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (fastestPath.get(i +1).getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65));
+							greenLinesBetweenNodesAndValue.put(new Line2D.Double((fastestPath.get(i).getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (fastestPath.get(i).getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65, (fastestPath.get(i +1).getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (fastestPath.get(i +1).getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65), Utillity.getFlightPathDistanceTest(fastestPath.get(i).getCoordinates(), fastestPath.get(i +1).getCoordinates()));
 						}
 
 						repaint();
@@ -105,23 +110,48 @@ public class RouteCityApplication extends JFrame{
 
 	public void paint(Graphics g) {
 		super.paint(g);
-		Graphics2D g2 = (Graphics2D) g;
 
-		paintLinesBetweenNodes(g2);
+
+		paintLinesBetweenNodes(g);
 
 	}
 
-	public void paintLinesBetweenNodes(Graphics2D g2) {
-		for (Line2D line : linesBetweenNodes)
-		{
-			g2.draw(line);
-		}
 
-		for (Line2D line : greenLinesBetweenNodes)
+	public void paintLinesBetweenNodes(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		/*for (Line2D line : linesBetweenNodes)
 		{
-			g2.setColor(Color.green);
 			g2.draw(line);
-		}
+		}*/
+
+			linesBetweenNodesAndValue.forEach((k,v)-> {
+				g2.draw(k);
+
+
+				float x = (float) ((k.getX1() + k.getX2()) / 2) ;
+				float y = (float) ((k.getY1() +  k.getY2()) / 2) ;
+
+				String vWithTwoDecimals = String.format("%.02f", v);
+				Font font = new Font(Font.MONOSPACED, Font.BOLD, 12);
+				g2.setFont(font);
+				g2.drawString(vWithTwoDecimals, x, y);
+		});
+
+		greenLinesBetweenNodesAndValue.forEach((k,v)-> {
+			g2.setColor(Color.GREEN);
+			g2.draw(k);
+
+			g2.setColor(Color.RED);
+
+			float x = (float) ((k.getX1() + k.getX2()) / 2) ;
+			float y = (float) ((k.getY1() +  k.getY2()) / 2) ;
+
+			String vWithTwoDecimals = String.format("%.02f", v);
+			Font font = new Font(Font.MONOSPACED, Font.BOLD, 12);
+			g2.setFont(font);
+			g2.drawString(vWithTwoDecimals, x, y);
+		});
+
 	}
 
 
