@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 class UtillityTest {
 
+	// test so our algoritm acually gets the shortest path between our nodes.
     @Test
     void djikstrasGetShortestPath() {
 
@@ -37,7 +38,7 @@ class UtillityTest {
 		assertEquals(correctNodes,Utillity.djikstrasGetShortestPath(node1, node4));
 
     }
-
+// gets the "flightPath" between 2 coordiantes.
     @Test
     void getFlightPathDistanceTest()
 	{
@@ -45,7 +46,7 @@ class UtillityTest {
 		Coordinates end = new Coordinates(10, 15);
     	assertEquals(5, Utillity.getFlightPathDistanceTest(start, end));
     }
-
+// checks if a node with taken coordinates exists.
     @Test
 	void checkIfNodeWithCoordinatesExist()
 	{

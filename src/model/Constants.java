@@ -1,6 +1,9 @@
 package model;
 
 public class Constants {
+	/**
+	 * All our public static final variables.
+	 */
 
 	public static final int mainFrameMaxX = 1035;
 	public static final  int mainFrameMaxY = 1000;
@@ -17,7 +20,5 @@ public class Constants {
 	public static final String inActiveNodeImagePath = "L:\\RouteCity\\src\\model\\viewModel\\resources\\node.png";
 	//public static final String activeNodeImagePath ="C:\\Users\\91matfri\\IdeaProjects\\RouteCity\\src\\model\\viewModel\\resources\\nodeActive.png";
 	//public static final String inActiveNodeImagePath = "C:\\Users\\91matfri\\IdeaProjects\\RouteCity\\src\\model\\viewModel\\resources\\node.png";
-    /** View constants below **/
-
 
 }

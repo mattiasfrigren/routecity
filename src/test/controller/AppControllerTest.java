@@ -29,7 +29,7 @@ class AppControllerTest {
 
 		assertEquals(sizeAtStart + 5, Session.getSession().getLoadedNodes().size(), "Something is wrong in adding new random nodes to session");
     }
-
+// tests that we create a closed circle with all the new nodes.
     @Test
     void createClosedCircuitWithAllNodes() throws IOException
 	{
@@ -45,7 +45,7 @@ class AppControllerTest {
     @Test
     void addRandomExtraConnectionAtRandomNodes() {
     }
-
+// adds an extra connection for a random nodes
     @Test
     void addRandomExtraConnectionAtRandomNode() throws IOException
 	{

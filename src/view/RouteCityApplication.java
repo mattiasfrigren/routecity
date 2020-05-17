@@ -31,7 +31,9 @@ public class RouteCityApplication extends JFrame{
 	{
 		initializeMainFrame();
 	}
-
+	/**
+	 * starts up out view and inialize all the objects.
+	 */
 	private void initializeMainFrame() throws IOException
 	{
 		setTitle("Route City");
@@ -47,7 +49,9 @@ public class RouteCityApplication extends JFrame{
 
 		setVisible(true);
 	}
-
+	/**
+	 * creates all the buttons.
+	 */
 	private void initializeButtons() throws IOException {
 		buttons = new JButton[2];
 		for (int i = 0; i < buttons.length; i++) {
@@ -56,6 +60,9 @@ public class RouteCityApplication extends JFrame{
 			add(buttons[i]);
 		}
 	}
+	/**
+	 * adds actionListeners to the buttons using lamda expression.
+	 */
 	private void initializeButtonsActionListners(){
 		buttons[0].addActionListener(actionEvent -> {
 			try {
@@ -75,7 +82,9 @@ public class RouteCityApplication extends JFrame{
 		});
 
 	}
-
+	/**
+	 * clears all of the data strukcturs and removes ViewNodes from the frame.
+	 */
 	public void resetView() {
 		for (ViewNode node : viewNodes) {
 			remove(node);
@@ -84,7 +93,9 @@ public class RouteCityApplication extends JFrame{
 		greenLinesBetweenNodesAndValue.clear();
 		viewNodes.clear();
 	}
-
+	/**
+	 * 
+	 */
 	public void initializeAllNodes() throws IOException
 	{
 		for (Node node : Session.getSession().getLoadedNodes())

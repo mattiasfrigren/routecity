@@ -19,6 +19,13 @@ public class ViewNode extends JPanel
 	private ImageIcon activeImage;
 	private boolean isActive = false;
 	private Node node;
+	/**
+	 * ViewNodes that extends JPanel so we can get an exact view on where the Nodes are.
+	 *
+	 * @param streetName name of the Node.
+	 * @param coordinates coordinates for the Node
+	 * @param node the node we are creating a view of.
+	 */
 
 	public ViewNode(String streetName, Coordinates coordinates, Node node) throws IOException
 	{
@@ -46,6 +53,9 @@ public class ViewNode extends JPanel
 		setVisible(true);
 
 	}
+	/**
+	 * Changes Image on the ViewNode depending if they are active or not
+	 */
 
 	public void switchImage()
 	{
