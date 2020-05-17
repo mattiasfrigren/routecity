@@ -1,5 +1,6 @@
 package view;
 
+import controller.OnActionListner;
 import controller.Utillity;
 import java.awt.Color;
 import java.awt.Font;
@@ -11,7 +12,8 @@ import java.awt.geom.Line2D;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.JFrame;
+import javax.swing.*;
+
 import model.Constants;
 import model.Node;
 import model.Session;
@@ -25,6 +27,7 @@ public class RouteCityApplication extends JFrame{
 
 	private HashMap<Line2D, Float> linesBetweenNodesAndValue = new HashMap<>();
 	private HashMap<Line2D, Float> greenLinesBetweenNodesAndValue = new HashMap<>();
+	private JButton buttons[];
 
 	public RouteCityApplication() throws IOException
 	{
@@ -42,15 +45,49 @@ public class RouteCityApplication extends JFrame{
 		setLocationRelativeTo(null);
 		initializeAllNodes();
 		initializeButtons();
+		initializeButtonsActionListners();
 
 		setVisible(true);
 	}
 
-	private void initializeButtons()
-	{
+	private void initializeButtons() throws IOException {
+		buttons = new JButton[2];
+		for (int i = 0; i < buttons.length; i++) {
+			buttons[i] = new JButton(Constants.buttonNames[i]);
+			buttons[i].setBounds(0,70*i,135,30);
+			add(buttons[i]);
+		}
+	}
+	private void initializeButtonsActionListners(){
+		buttons[0].addActionListener(actionEvent -> {
+			try {
+				OnActionListner.resetAllNodes();
+				repaint();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		buttons[1].addActionListener(actionEvent -> {
+			try {
+				OnActionListner.AddExtraConnectionAtRandomNode();
+				repaint();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+
 	}
 
-	private void initializeAllNodes() throws IOException
+	public void resetView() {
+		for (ViewNode node : viewNodes) {
+			remove(node);
+		}
+		linesBetweenNodesAndValue.clear();
+		greenLinesBetweenNodesAndValue.clear();
+		viewNodes.clear();
+	}
+
+	public void initializeAllNodes() throws IOException
 	{
 		for (Node node : Session.getSession().getLoadedNodes())
 		{

@@ -34,7 +34,6 @@ public class AppController {
         Utillity.createClosedCircuitWithAllNodes();
        	addRandomExtraConnectionAtRandomNodes(4);
         // TODO Initialize view // Update it.
-
      	view = new RouteCityApplication();
 
     }
@@ -133,10 +132,14 @@ public class AppController {
 		}
     }
 
-    public void resetAllNodes()
-    {
+    public void resetAllNodes() throws IOException {
         Session.getSession().resetSession();
-        // TODO Add view reset.
+        view.resetView();
+		addRandomNodesToSession(10);
+		Utillity.createClosedCircuitWithAllNodes();
+		addRandomExtraConnectionAtRandomNodes(4);
+		view.initializeAllNodes();
+		// TODO Add view reset.
     }
 
     public void resetSelectedNodes() {
