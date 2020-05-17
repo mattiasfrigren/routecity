@@ -1,9 +1,7 @@
 package test.controller;
 
 
-import controller.AppController;
 import java.util.ArrayList;
-import java.util.HashMap;
 import model.Coordinates;
 import static org.junit.jupiter.api.Assertions.*;
 

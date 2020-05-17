@@ -22,8 +22,6 @@ import model.viewModel.ViewNode;
 public class RouteCityApplication extends JFrame{
 
 	private ArrayList<ViewNode> viewNodes = new ArrayList<>();
-	private ArrayList<Line2D> linesBetweenNodes = new ArrayList<>();
-	private ArrayList<Line2D> greenLinesBetweenNodes = new ArrayList<>();
 
 	private HashMap<Line2D, Float> linesBetweenNodesAndValue = new HashMap<>();
 	private HashMap<Line2D, Float> greenLinesBetweenNodesAndValue = new HashMap<>();
@@ -96,7 +94,6 @@ public class RouteCityApplication extends JFrame{
 			for (Node nod: node.getConnectedNodes())
 			{
 				linesBetweenNodesAndValue.put(new Line2D.Double((node.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (node.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65, (nod.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (nod.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65), Utillity.getFlightPathDistanceTest(node.getCoordinates(), nod.getCoordinates()));
-				//linesBetweenNodes.add(new Line2D.Double((node.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (node.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65, (nod.getCoordinates().getX() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.145, (nod.getCoordinates().getY() * Constants.nodeViewSize) + Constants.nodeViewSize * 1.65));
 			}
 
 
@@ -156,10 +153,6 @@ public class RouteCityApplication extends JFrame{
 
 	public void paintLinesBetweenNodes(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		/*for (Line2D line : linesBetweenNodes)
-		{
-			g2.draw(line);
-		}*/
 		Font font = new Font(Font.MONOSPACED, Font.BOLD, 12);
 		g2.setFont(font);
 

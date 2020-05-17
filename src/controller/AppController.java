@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.util.Random;
-import javax.swing.DefaultListSelectionModel;
 import model.Constants;
 import model.Node;
 import model.Session;
@@ -33,7 +32,6 @@ public class AppController {
      	addRandomNodesToSession(10);
         Utillity.createClosedCircuitWithAllNodes();
        	addRandomExtraConnectionAtRandomNodes(4);
-        // TODO Initialize view // Update it.
      	view = new RouteCityApplication();
 
     }
@@ -135,16 +133,12 @@ public class AppController {
     public void resetAllNodes() throws IOException {
         Session.getSession().resetSession();
         view.resetView();
+		currentNameIndex = 0;
 		addRandomNodesToSession(10);
 		Utillity.createClosedCircuitWithAllNodes();
 		addRandomExtraConnectionAtRandomNodes(4);
 		view.initializeAllNodes();
-		// TODO Add view reset.
     }
 
-    public void resetSelectedNodes() {
-
-        // TODO Update view
-    }
 
 }
