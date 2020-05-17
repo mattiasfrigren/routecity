@@ -17,7 +17,11 @@ public class Session {
     {
         loadedNodes = new ArrayList<>();
     }
-
+    /**
+     * Singleton of Session class.
+     *
+     * @return returns session.
+     */
     public static Session getSession()
     {
         if (session == null)
@@ -52,7 +56,9 @@ public class Session {
     public void removeFromLoadedNodes(Node node) {
         loadedNodes.remove(node);
     }
-
+    /**
+     * @param node sets the starting node of the Session.
+     */
     public void setSelectedNode(Node node) {
 		selectStartNode = !selectStartNode;
 

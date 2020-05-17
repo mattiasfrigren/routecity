@@ -4,6 +4,12 @@ public class Coordinates
 {
 	private int x;
 	private int y;
+	/**
+	 * Coordinates for the Nodes.
+	 *
+	 * @param coordinateX X value.
+	 * @param coordinateY Y Value.
+	 */
 
 	public Coordinates (int coordinateX, int coordinateY)
 	{

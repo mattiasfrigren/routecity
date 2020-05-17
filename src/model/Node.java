@@ -13,6 +13,13 @@ public class Node {
 	public Node cameFromNode;
 
     private ArrayList<Node> connectedNodes;
+    /**
+     * Our Nodes that we create and connect together.
+     *
+     * @param streetName name of the Node.
+     * @param coordinateX X value.
+     * @param coordinateY Y value.
+     */
 
     public Node(String streetName, int coordinateX, int coordinateY)
     {
