@@ -75,6 +75,12 @@ public class Utillity {
         return null;
     }
 
+	/**
+	 * After caluclating djikstras you use this to get the path.
+	 *
+	 * @param endNode The last node you sat value at.
+	 * @return ArrayList of the path of nodes.
+	 */
     private static ArrayList<Node> calculatePath(Node endNode)
 	{
 		ArrayList<Node> path = new ArrayList<>();
