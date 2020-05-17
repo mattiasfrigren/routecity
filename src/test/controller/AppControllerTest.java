@@ -11,14 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AppControllerTest {
 
-    @Test
-    void getController() {
-    }
-
-    @Test
-    void initializeProgram() {
-    }
-
+	// test if random node is added to session.
     @Test
     void addRandomNodesToSession() throws IOException
 	{
@@ -34,38 +27,24 @@ class AppControllerTest {
     void createClosedCircuitWithAllNodes() throws IOException
 	{
 
-		AppController.getController().addRandomNodesToSession(5);  // adding 5 nodes.
+		AppController.getController();
 
-		Utillity.createClosedCircuitWithAllNodes();
 		for (Node node: Session.getSession().getLoadedNodes()) {
-			assertEquals(2, node.getConnectedNodes().size(), "Node: " + node.getStreetName() + " Do not have two connections.");
+			assertTrue( node.getConnectedNodes().size() >= 2, "Node: " + node.getStreetName() + " Do not have two connections.");
 		}
     }
 
-    @Test
-    void addRandomExtraConnectionAtRandomNodes() {
-    }
 // adds an extra connection for a random nodes
     @Test
     void addRandomExtraConnectionAtRandomNode() throws IOException
 	{
-		AppController.getController().addRandomNodesToSession(5);  // adding 5 nodes.
-		Utillity.createClosedCircuitWithAllNodes();
+		AppController.getController();
 
-		AppController.getController().addRandomExtraConnectionAtRandomNode();
-		int totalExpectedNodeConnections = (Session.getSession().getLoadedNodes().size() * 2) + 2;
+		int totalExpectedNodeConnections = (Session.getSession().getLoadedNodes().size() * 2) + 8;  // +8 because there is 4 random connections.
 		int totalNodeConnections = 0;
 		for (Node node: Session.getSession().getLoadedNodes()) {
 			totalNodeConnections += node.getConnectedNodes().size();
 		}
 		assertEquals(totalExpectedNodeConnections, totalNodeConnections, "Did not add extra connection");
-    }
-
-    @Test
-    void resetAllNodes() {
-    }
-
-    @Test
-    void resetSelectedNodes() {
     }
 }
