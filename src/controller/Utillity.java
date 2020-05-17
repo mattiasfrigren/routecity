@@ -8,16 +8,37 @@ import model.Session;
 
 public class Utillity {
 
+	/**
+	 * Caluclate straight path distance between two coordinates.
+	 *
+	 * @param startNode the node you wanna calculate straight path from.
+	 * @param endNode the node you wanna calculate straight path to.
+	 * @return float value of the distance between startNode and endNode
+	 */
     private static float getFlightPathDistance(Node startNode, Node endNode)
     {
     	return getFlightPathDistance(startNode.getCoordinates(), endNode.getCoordinates());
     }
 
+	/**
+	 * Caluclate straight path distance between two coordinates.
+	 *
+	 * @param start the coordinate you wanna calculate straight path from.
+	 * @param end the coordinate you wanna calculate straight path to.
+	 * @return float value of the distance between startNode and endNode
+	 */
 	private static float getFlightPathDistance(Coordinates start, Coordinates end)
 	{
 		return (float) Math.sqrt(Math.pow(start.getX() - end.getX(), 2) + Math.pow(start.getY() - end.getY(), 2));
 	}
 
+	/**
+	 * Caluclates path to walk from one node to another.
+	 *
+	 * @param startNode the node you wanna calculate path from.
+	 * @param endNode the node you wanna calculate path to.
+	 * @return ArrayList with the path of nodes with shortest path from startNode to endNode.
+	 */
     public static ArrayList<Node> djikstrasGetShortestPath(Node startNode, Node endNode)
     {
     	ArrayList<Node> openList = new ArrayList<>();
@@ -71,7 +92,7 @@ public class Utillity {
 			}
 		}
 
-		// Didnt find node
+		// Didn't find path to node.
         return null;
     }
 
@@ -96,6 +117,12 @@ public class Utillity {
 		return path;
 	}
 
+	/**
+	 * Get the node with lowest FCost from list of nodes.
+	 *
+	 * @param nodes the node you wanna calculate path from.
+	 * @return Node with lowest FCost.
+	 */
     private static Node getLowestFCostNode(ArrayList<Node> nodes)
 	{
 		Node lowestFCostNode = nodes.get(0);
@@ -109,6 +136,13 @@ public class Utillity {
 		return lowestFCostNode;
 	}
 
+	/**
+	 * Checking if a node in Session already have the coordinates.
+	 *
+	 * @param x The x coordinate value.
+	 * @param y The y coordinate value.
+	 * @return true if a node exists at coordinate.
+	 */
 	public static boolean checkIfNodeWithCoordinatesExist(int x, int y)
 	{
         for (Node node: Session.getSession().getLoadedNodes())
@@ -121,6 +155,10 @@ public class Utillity {
 	    return false;
 	}
 
+	/**
+	 * Connecting all nodes with each other in a closed circuit.
+	 *
+	 */
 	public static void createClosedCircuitWithAllNodes()
 	{
 		int connectTo = 0;
@@ -135,11 +173,23 @@ public class Utillity {
 		}
 	}
 
+	/**
+	 * Connecting node by index with other node by index.
+	 *
+	 * @param index1 The index of the node you want to connect in Session.
+	 * @param index2 The index of the node you want to connect with index2 in Session.
+	 */
 	public static void connectNode(int index1, int index2)
 	{
 		connectNode(Session.getSession().getLoadedNodes().get(index1), Session.getSession().getLoadedNodes().get(index2));
 	}
 
+	/**
+	 * Connecting node by with other node.
+	 *
+	 * @param nodeToAddAt The node you want to connect in Session.
+	 * @param nodeToConnectTo The node you want to connect with index2 in Session.
+	 */
 	public static void connectNode(Node nodeToAddAt, Node nodeToConnectTo)
 	{
 		nodeToAddAt.addConnectedNode(nodeToConnectTo);

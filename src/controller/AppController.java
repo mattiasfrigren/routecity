@@ -18,6 +18,10 @@ public class AppController {
         initializeProgram();
     }
 
+	/**
+	 * Singelton, returns controller.
+	 *
+	 */
     public static AppController getController() throws IOException
 	{
         if (controller == null)
@@ -27,6 +31,10 @@ public class AppController {
         return controller;
     }
 
+	/**
+	 *  Initialize everything in the program.
+	 *
+	 */
     public void initializeProgram() throws IOException
 	{
      	addRandomNodesToSession(10);
@@ -36,6 +44,11 @@ public class AppController {
 
     }
 
+	/**
+	 * Adds an amount of nodes to Session with random coordinates that is not taken.
+	 *
+	 * @param amount The amounts of nodes to add.
+	 */
     public void addRandomNodesToSession(int amount)
     {
 		for (int i = 0; i < amount; i++)
@@ -45,6 +58,10 @@ public class AppController {
 
     }
 
+	/**
+	 * Adds a node to Session with random coordinates that is not taken.
+	 *
+	 */
     private void addRandomNodeToSession()
 	{
 		int x = new Random().nextInt(Constants.maxXCoordinate);
@@ -78,23 +95,46 @@ public class AppController {
 
 	}
 
+	/**
+	 * Checking if a node in Session already is connected with another node.
+	 *
+	 * @param index1 the node index to check at.
+	 * @param index2 the node index to check with index1.
+	 * @return true if index1 node has connection with index2.
+	 */
 	private boolean isConnected(int index1, int index2)
 	{
 		return isConnected(Session.getSession().getLoadedNodes().get(index1), Session.getSession().getLoadedNodes().get(index2));
 	}
 
+	/**
+	 * Checking if a node in Session already is connected with another node.
+	 *
+	 * @param node1 the node to check at.
+	 * @param node2 the node to check with node1.
+	 * @return true if node has connection with node2.
+	 */
     private boolean isConnected(Node node1, Node node2)
 	{
 		return node1.getConnectedNodes().contains(node2);
 	}
 
-    public void addRandomExtraConnectionAtRandomNodes(int i) {
-		for (int j = 0; j < i; j++)
+	/**
+	 * Adds an amount of extra connections to nodes in Session.
+	 *
+	 * @param amount the amount of random extra connections to add.
+	 */
+    public void addRandomExtraConnectionAtRandomNodes(int amount) {
+		for (int j = 0; j < amount; j++)
 		{
 			addRandomExtraConnectionAtRandomNode();
 		}
     }
 
+	/**
+	 * Adds random extra connection to nodes in Session.
+	 *
+	 */
     public void addRandomExtraConnectionAtRandomNode() {
 
     	if (Session.getSession().getLoadedNodes().size() < 2)
@@ -130,6 +170,10 @@ public class AppController {
 		}
     }
 
+	/**
+	 * Reset all nodes, in session and in view and gives you a fresh new load.
+	 *
+	 */
     public void resetAllNodes() throws IOException {
         Session.getSession().resetSession();
         view.resetView();
